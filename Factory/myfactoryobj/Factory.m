@@ -11,6 +11,44 @@
 @implementation Factory
 
 //利用NSObject，和向上转型来创建一个通用对象，当我们要创建一个具体的对象的时候，我们获取该对象以后，还要向下转型
+//利用id也是可以的，id和NSObject *的区别就是
+/*
+ 在objc.h中，可以看到id的定义如下
+ 
+ typedef struct objc_class *Class;
+ typedef struct objc_object {
+ Class isa;
+ } *id;
+ 
+ 
+ 在NSObject.h中，可以看到NSObject类的定义如下
+ @interface NSObject <NSObject> {
+ Class isa;
+ }
+ 
+ 
+ + (void)load;
+ 
+ 
+ + (void)initialize;
+ - (id)init;
+ 
+ 
+ + (id)new;
+ + (id)allocWithZone:(NSZone *)zone;
+ + (id)alloc;
+ - (void)dealloc;
+ 
+ 
+ // 很多其它方法，这里省了......
+ 
+ 
+ @end
+ 
+ 
+ 两个类型都含有Class isa，但NSObject同时包含了一些其它的方法，并需要实现NSObject协议。
+ 所以NSObject*可以用id来表示。但id不能用NSObject*来表示。
+ */
 +(NSObject *)createObject:(NSString *)objName
 {
     NSObject *obj = nil;
